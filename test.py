@@ -7,9 +7,16 @@ def cleanup(value):
             value[key] = cleanup(value[key])
         return value
     else:
+        # DEBUG
         # print "VALUE:", value
-        pattern = re.compile("(-\s)*www.songs.pk", re.IGNORECASE)
+
+        # pattern = re.compile("(-\s)*www.songs.pk", re.IGNORECASE)
+        pattern = re.compile("(\s(\||-)*\s)*(Songspk.name|Songs.pk)(\s(\||-)*\s)*", re.IGNORECASE)
         output = pattern.sub("", value)
+        
+        # DEBUG
+        # print "OUTPUT: "  + output
+        
         return output.strip()
 
 def cleanUpFile(filePath):
@@ -29,4 +36,3 @@ def cleanUpFile(filePath):
 if __name__ == "__main__":
     filePath = sys.argv[1]
     cleanUpFile(filePath)
-
